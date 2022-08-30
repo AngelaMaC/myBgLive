@@ -19,7 +19,7 @@ async function refreshData() {
             return datapoint.sgv
         })
 
-        // chart setup        
+        // Chartjs setup        
 
         const labels = date
         const data = {
@@ -33,7 +33,7 @@ async function refreshData() {
             }]
         }
 
-        // chart config
+        // Chartjs config
         const config = {
             type: 'line',
             data: data,
@@ -81,7 +81,7 @@ async function refreshData() {
             }
         }
 
-        // render chart
+        // render Chartjs
         let myChart = null
 
         if (Chart.getChart('myChart')) {
