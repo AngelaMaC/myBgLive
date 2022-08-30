@@ -5,29 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test API Retrieval</title>
+    <title>Live BG Readings</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="app">
-        <h1 id="title">Sugar Glucose Value Readings</h1>
-        <div id="button-data">
-            <button type='button' id="refresh-data">Refresh Data</button>
-        </div>
-        <table id="data-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>SGV</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
+        <div class="chart-card">
+            <h1 id="title">Live Blood Sugar Readings</h1>
+            <div id="refresh-data">
+            </div>
+            <div id="my-bg">
+                <canvas id="myChart"></canvas>
+            </div>
 
-        </table>
+        </div>
+        <footer className='created'>
+            <p>
+                &copy;Angela M. Canning 2022&nbsp;
+            </p>
+            <a href='https://github.com/AngelaMaC/angelacanning' target='blank' rel='noopener noreferrer'> View on
+                github</a>
+        </footer>
     </div>
-    <script src="app2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

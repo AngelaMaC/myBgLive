@@ -52,6 +52,30 @@ table {
     position: relative;
 }
 
+#my-bg {
+    background-color: white;
+    height: auto;
+    width: 80vw;
+    flex: 1 1 1px;
+    border-radius: 8px;
+
+}
+
+.chart-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
 td,
 th {
     padding-left: 8px
@@ -94,6 +118,22 @@ tbody tr:last-child {
     color: white;
     font-weight: 500;
 }
+
+.created {
+    text-align: center;
+    color: #DDF2EB;
+    margin-top: 100px;
+}
+
+footer a {
+    color: #DDF2EB;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #3FB8AF;
+}
+
 
 body {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
