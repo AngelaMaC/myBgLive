@@ -23,11 +23,11 @@ async function refreshData() {
         const bkgcolor = [];
 
         for (i = 0; i < sgv.length; i++) {
-            // datapoint color orange if less than 50
+            // pink if less than 50
             if (sgv[i] < 50) { bkgcolor.push('#e73c7e') }
-            // datapoint color blue if between 50 but less than 200
+            // blue if between 50 but less than 200
             if (sgv[i] >= 50 && sgv[i] < 200) { bkgcolor.push('#23a6d5') }
-            // datapoint color orange if over 200
+            // orange if over 200
             if (sgv[i] >= 200) { bkgcolor.push('#ee7752') }
         }
 
@@ -42,7 +42,7 @@ async function refreshData() {
                 borderColor: bkgcolor,
                 // backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 // borderColor: 'rgba(255, 99, 132, 1)',
-                tension: 0.4
+                tension: 0.4,
             }]
         }
 
@@ -65,7 +65,7 @@ async function refreshData() {
                                 size: 13
                             },
                         },
-                        min: 20,
+                        min: 40,
                         max: 400,
                         ticks: {
                             stepSize: 20
@@ -90,6 +90,14 @@ async function refreshData() {
                                 return this.getLabelForValue(value).substr(-8);
                             }
                         },
+                    }
+                },
+                // removes colored box next to BG Data title
+                plugins: {
+                    legend: {
+                        labels: {
+                            boxWidth: 0
+                        }
                     }
                 }
             }
