@@ -3,7 +3,7 @@ refreshData()
 async function refreshData() {
     // Get BG data
     async function getData() {
-        const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count=125'
+        const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count=24'
         const response = await fetch(url)
         const datapoints = await response.json()
         // reverse order of data so chart displays from left to right
@@ -19,16 +19,29 @@ async function refreshData() {
             return datapoint.sgv
         })
 
-        // Chartjs setup        
+        // Change color of datapoint to indicate BG range
+        const bkgcolor = [];
 
+        for (i = 0; i < sgv.length; i++) {
+            // datapoint color orange if less than 50
+            if (sgv[i] < 50) { bkgcolor.push('#e73c7e') }
+            // datapoint color blue if between 50 but less than 200
+            if (sgv[i] >= 50 && sgv[i] < 200) { bkgcolor.push('#23a6d5') }
+            // datapoint color orange if over 200
+            if (sgv[i] >= 200) { bkgcolor.push('#ee7752') }
+        }
+
+        // Chartjs setup  
         const labels = date
         const data = {
             labels: labels,
             datasets: [{
                 label: 'BG Data',
                 data: sgv, // result of sgv map
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: bkgcolor,
+                borderColor: bkgcolor,
+                // backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                // borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.4
             }]
         }
@@ -41,6 +54,7 @@ async function refreshData() {
                 layout: {
                     padding: 20
                 },
+                //maintainAspectRatio: false,
                 responsive: true,
                 scales: {
                     y: {
@@ -48,11 +62,11 @@ async function refreshData() {
                             display: true,
                             text: 'BG',
                             font: {
-                                size: 17
+                                size: 13
                             },
                         },
-                        min: 40,
-                        max: 300,
+                        min: 20,
+                        max: 400,
                         ticks: {
                             stepSize: 20
                         },
@@ -63,7 +77,7 @@ async function refreshData() {
                             display: true,
                             text: 'Time',
                             font: {
-                                size: 17
+                                size: 13
                             },
                             type: 'time',
                             time: {
