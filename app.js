@@ -3,8 +3,9 @@ refreshData()
 async function refreshData() {
     // Get BG data
     async function getData() {
-        const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count=24'
-        const response = await fetch(url)
+        const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count='
+        count = '48'
+        let response = await fetch(url + count)
         const datapoints = await response.json()
         // reverse order of data so chart displays from left to right
         return datapoints.reverse()
@@ -60,9 +61,11 @@ async function refreshData() {
                     y: {
                         title: {
                             display: true,
-                            text: 'BG',
+                            text: 'Blood Glucose Value',
+                            color: '#23a6d5',
                             font: {
-                                size: 13
+                                size: 13,
+                                weight: 'bold',
                             },
                         },
                         min: 40,
@@ -76,10 +79,11 @@ async function refreshData() {
                         title: {
                             display: true,
                             text: 'Time',
+                            color: '#23a6d5',
                             font: {
-                                size: 13
+                                size: 13,
+                                weight: 'bold'
                             },
-                            type: 'time',
                             time: {
                                 unit: 'day'
                             },
@@ -92,12 +96,15 @@ async function refreshData() {
                         },
                     }
                 },
-                // removes colored box next to BG Data title
+                // removes colored box next to BG Data title, adds bold to dataset text
                 plugins: {
                     legend: {
                         labels: {
-                            boxWidth: 0
-                        }
+                            boxWidth: 0,
+                            font: {
+                                weight: 'bold'
+                            },
+                        },
                     }
                 }
             }
@@ -130,15 +137,3 @@ function updateUser() {
 
     updated.innerHTML = `<p id='data-update'>Updated on ${date2}</p>`
 }
-
-
-// optional manual button to refresh data
-// const btn = document.querySelector('#refresh-data')
-
-// btn.addEventListener('click', () => {
-//     refreshData()
-//     console.log('data refreshed')
-//     const updated = document.querySelector('#button-data');
-//     const date2 = new Date()
-//     updated.insertAdjacentHTML('beforebegin', `<p id='data-update'>Updated on ${date2.toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>`);
-// })
