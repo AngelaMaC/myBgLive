@@ -7,23 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live BG Readings</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9ce197c2e2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="app">
+        <div class="loader fa-3x">
+            <h2>Loading BG Data </h2>
+            <i class="fas fa-spinner fa-pulse"></i>
+        </div>
         <div class="chart-card">
             <h1 id="title">Live Blood Sugar Readings</h1>
             <div id="refresh-data">
             </div>
             <div id="my-bg">
                 <canvas id="myChart"></canvas>
-                <!-- <div id="button-container">
+                <div id="button-container">
                     <button type="button" id="four" value="4">4 Hours</button>
                     <button type="button" id="eight" value="8">8 Hours</button>
                     <button type="button" id="twelve" value="12">12 Hours</button>
-                </div> -->
+                </div>
             </div>
-
         </div>
         <footer className='created'>
             <p>

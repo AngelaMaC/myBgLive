@@ -1,5 +1,10 @@
 refreshData()
 
+window.addEventListener("load", function () {
+    const loader = document.querySelector(".loader")
+    loader.className += " hidden"; // class "loader hidden"
+})
+
 async function refreshData() {
     // Get BG data
     async function getData() {
@@ -31,6 +36,7 @@ async function refreshData() {
             // orange if over 200
             if (sgv[i] >= 200) { bkgcolor.push('#ee7752') }
         }
+
 
         // Chartjs setup  
         const labels = date
@@ -137,3 +143,53 @@ function updateUser() {
 
     updated.innerHTML = `<p id='data-update'>Updated on ${date2}</p>`
 }
+
+const four = document.querySelector('#four')
+const eight = document.querySelector('#eight')
+const twelve = document.querySelector('#twelve')
+four.addEventListener('click', changeView)
+eight.addEventListener('click', changeView)
+twelve.addEventListener('click', changeView)
+function changeView(e) {
+    if (e.target.matches('#four')) {
+        console.log('four clicked')
+        count = '48'
+        console.log(count)
+        refreshData()
+    } else if (e.target.matches('#eight')) {
+        console.log('eight clicked')
+        count = '96'
+        refreshData()
+    } else if (e.target.matches('#twelve')) {
+        console.log('twelve clicked')
+        count = '144'
+        refreshData()
+    }
+
+}
+
+
+// Change view
+// const four = document.querySelector('#four')
+// const eight = document.querySelector('#eight')
+// const twelve = document.querySelector('#twelve')
+// four.addEventListener('click', changeView)
+// eight.addEventListener('click', changeView)
+// twelve.addEventListener('click', changeView)
+
+// function changeView(e) {
+//     if (e.target.matches('#four')) {
+//         console.log('four clicked')
+//         count = '48'
+//         console.log(count)
+//         // refreshData('48')
+//     } else if (e.target.matches('#eight')) {
+//         console.log('eight clicked')
+//         count = '96'
+//         // refreshData('96')
+//     } else if (e.target.matches('#twelve')) {
+//         console.log('twelve clicked')
+//         count = '144'
+//     }
+//     refreshData()
+// }
