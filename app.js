@@ -1,16 +1,12 @@
 refreshData()
 
-window.addEventListener("load", function () {
-    const loader = document.querySelector(".loader")
-    loader.className += " hidden"; // class "loader hidden"
-})
-
-async function refreshData() {
-    // Get BG data
+function refreshData() {
+    // Get BG data    
     async function getData() {
         const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count='
         count = '48'
         let response = await fetch(url + count)
+
         const datapoints = await response.json()
         // reverse order of data so chart displays from left to right
         return datapoints.reverse()
@@ -24,6 +20,11 @@ async function refreshData() {
         const sgv = datapoints.map(datapoint => {
             return datapoint.sgv
         })
+
+        // Activate loading screen fade animation after data renders chart
+        document.querySelector('.loader').className += ' hidden' // class '.loader .hidden'
+        // loader.style.display = 'none'
+
 
         // Change color of datapoint to indicate BG range
         const bkgcolor = [];
@@ -117,10 +118,10 @@ async function refreshData() {
         }
 
         // render Chartjs
-        let myChart = null
+        // let myChart = null
 
         if (Chart.getChart('myChart')) {
-            Chart.getChart('myChart').destroy();
+            Chart.getChart('myChart').destroy()
         }
 
         myChart = new Chart(
@@ -129,7 +130,8 @@ async function refreshData() {
         )
 
         updateUser()
-    });
+        // myChart.render()
+    })
 }
 
 // auto fetch new BG data every five minutes
@@ -144,52 +146,69 @@ function updateUser() {
     updated.innerHTML = `<p id='data-update'>Updated on ${date2}</p>`
 }
 
+// const four = document.querySelector('#four')
+// const eight = document.querySelector('#eight')
+// const twelve = document.querySelector('#twelve')
+// four.addEventListener('click', changeView)
+// button.addEventListener('click', function (e) {
+//     if (e.target.matches('#four')) {
+//         four.setAttribute('data-value', '48')
+//         console.log(e.target.dataset.value)
+//         refreshData()
+//     } if (e.target.matches('#eight')) {
+//         four.setAttribute('data-value', '96')
+//         console.log(e.target.dataset.value)
+//         refreshData()
+//     } if (e.target.matches('#twelve')) {
+//         four.setAttribute('data-value', '144')
+//         console.log(e.target.dataset.value)
+//         refreshData()
+//     }
+// })
+
+
+
+// eight.addEventListener('click', changeView)
+// twelve.addEventListener('click', changeView)
+// function changeView(e) {
+//     if (e.target.matches('#four')) {
+//         four.setAttribute('data-value', '48')
+//         console.log(e.target.dataset.value)
+//         refreshData()
+//     } else if (e.target.matches('#eight')) {
+//         console.log('eight clicked')
+//         count = '96'
+//         refreshData()
+//     } else if (e.target.matches('#twelve')) {
+//         console.log('twelve clicked')
+//         count = '144'
+//         refreshData()
+//     }
+
+// }
+
+
+// Change view
 const four = document.querySelector('#four')
 const eight = document.querySelector('#eight')
 const twelve = document.querySelector('#twelve')
 four.addEventListener('click', changeView)
 eight.addEventListener('click', changeView)
 twelve.addEventListener('click', changeView)
+
 function changeView(e) {
-    if (e.target.matches('#four')) {
+    if (this.matches('#four')) {
         console.log('four clicked')
         count = '48'
         console.log(count)
-        refreshData()
-    } else if (e.target.matches('#eight')) {
+        // refreshData('48')
+    } else if (this.matches('#eight')) {
         console.log('eight clicked')
         count = '96'
-        refreshData()
+        // refreshData('96')
     } else if (e.target.matches('#twelve')) {
         console.log('twelve clicked')
         count = '144'
-        refreshData()
     }
-
+    refreshData()
 }
-
-
-// Change view
-// const four = document.querySelector('#four')
-// const eight = document.querySelector('#eight')
-// const twelve = document.querySelector('#twelve')
-// four.addEventListener('click', changeView)
-// eight.addEventListener('click', changeView)
-// twelve.addEventListener('click', changeView)
-
-// function changeView(e) {
-//     if (e.target.matches('#four')) {
-//         console.log('four clicked')
-//         count = '48'
-//         console.log(count)
-//         // refreshData('48')
-//     } else if (e.target.matches('#eight')) {
-//         console.log('eight clicked')
-//         count = '96'
-//         // refreshData('96')
-//     } else if (e.target.matches('#twelve')) {
-//         console.log('twelve clicked')
-//         count = '144'
-//     }
-//     refreshData()
-// }
