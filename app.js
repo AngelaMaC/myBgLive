@@ -26,6 +26,7 @@ function refreshData() {
         // loader.style.display = 'none'
 
 
+
         // Change color of datapoint to indicate BG range
         const bkgcolor = [];
 
@@ -68,7 +69,7 @@ function refreshData() {
                     y: {
                         title: {
                             display: true,
-                            text: 'Blood Glucose Value',
+                            text: 'BG Value',
                             color: '#23a6d5',
                             font: {
                                 size: 13,
