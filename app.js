@@ -1,12 +1,12 @@
+let count
 refreshData()
 
-function refreshData() {
+function refreshData(count) {
     // Get BG data    
     async function getData() {
         const url = 'https://canning.herokuapp.com/api/v1/entries/sgv.json?count='
-        count = '48'
+        if (!count) count = 48
         let response = await fetch(url + count)
-
         const datapoints = await response.json()
         // reverse order of data so chart displays from left to right
         return datapoints.reverse()
@@ -22,10 +22,7 @@ function refreshData() {
         })
 
         // Activate loading screen fade animation after data renders chart
-        document.querySelector('.loader').className += ' hidden' // class '.loader .hidden'
-        // loader.style.display = 'none'
-
-
+        document.querySelector('.loader').className += ' hidden' // CSS: class '.loader .hidden'
 
         // Change color of datapoint to indicate BG range
         const bkgcolor = [];
@@ -46,11 +43,9 @@ function refreshData() {
             labels: labels,
             datasets: [{
                 label: 'BG Data',
-                data: sgv, // result of sgv map
+                data: sgv, // BG Values
                 backgroundColor: bkgcolor,
                 borderColor: bkgcolor,
-                // backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                // borderColor: 'rgba(255, 99, 132, 1)',
                 tension: 0.4,
             }]
         }
@@ -63,7 +58,6 @@ function refreshData() {
                 layout: {
                     padding: 20
                 },
-                //maintainAspectRatio: false,
                 responsive: true,
                 scales: {
                     y: {
@@ -99,7 +93,7 @@ function refreshData() {
                         ticks: {
                             // display only time in labels, but full data on datapoint hover
                             callback: function (value) {
-                                return this.getLabelForValue(value).substr(-8);
+                                return this.getLabelForValue(value).substr(-8)
                             }
                         },
                     }
@@ -119,8 +113,6 @@ function refreshData() {
         }
 
         // render Chartjs
-        // let myChart = null
-
         if (Chart.getChart('myChart')) {
             Chart.getChart('myChart').destroy()
         }
@@ -129,65 +121,22 @@ function refreshData() {
             document.getElementById('myChart'),
             config
         )
-
         updateUser()
-        // myChart.render()
+
     })
 }
 
 // auto fetch new BG data every five minutes
-setInterval(refreshData, 300000)
+// setInterval(refreshData, 50000)
 
-// update message
 
+// Updated message
 function updateUser() {
     const updated = document.querySelector('#refresh-data')
     const date2 = new Date().toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
 
     updated.innerHTML = `<p id='data-update'>Updated on ${date2}</p>`
 }
-
-// const four = document.querySelector('#four')
-// const eight = document.querySelector('#eight')
-// const twelve = document.querySelector('#twelve')
-// four.addEventListener('click', changeView)
-// button.addEventListener('click', function (e) {
-//     if (e.target.matches('#four')) {
-//         four.setAttribute('data-value', '48')
-//         console.log(e.target.dataset.value)
-//         refreshData()
-//     } if (e.target.matches('#eight')) {
-//         four.setAttribute('data-value', '96')
-//         console.log(e.target.dataset.value)
-//         refreshData()
-//     } if (e.target.matches('#twelve')) {
-//         four.setAttribute('data-value', '144')
-//         console.log(e.target.dataset.value)
-//         refreshData()
-//     }
-// })
-
-
-
-// eight.addEventListener('click', changeView)
-// twelve.addEventListener('click', changeView)
-// function changeView(e) {
-//     if (e.target.matches('#four')) {
-//         four.setAttribute('data-value', '48')
-//         console.log(e.target.dataset.value)
-//         refreshData()
-//     } else if (e.target.matches('#eight')) {
-//         console.log('eight clicked')
-//         count = '96'
-//         refreshData()
-//     } else if (e.target.matches('#twelve')) {
-//         console.log('twelve clicked')
-//         count = '144'
-//         refreshData()
-//     }
-
-// }
-
 
 // Change view
 const four = document.querySelector('#four')
@@ -198,18 +147,13 @@ eight.addEventListener('click', changeView)
 twelve.addEventListener('click', changeView)
 
 function changeView(e) {
-    if (this.matches('#four')) {
-        console.log('four clicked')
-        count = '48'
-        console.log(count)
-        // refreshData('48')
-    } else if (this.matches('#eight')) {
-        console.log('eight clicked')
-        count = '96'
-        // refreshData('96')
-    } else if (e.target.matches('#twelve')) {
-        console.log('twelve clicked')
-        count = '144'
+    if (e.target.matches('#four')) {
+        refreshData(49)
     }
-    refreshData()
+    if (this.matches('#eight')) {
+        refreshData(97)
+    }
+    if (e.target.matches('#twelve')) {
+        refreshData(145)
+    }
 }
