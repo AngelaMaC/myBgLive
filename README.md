@@ -1,6 +1,12 @@
 # myBgLive
 
-This application fetches blood sugar data from a Heroku server and displays it using Chart.js. The data can be viewed in 4 Hour, 8 Hour, and 12 Hour segments by selecting each corresponding button.
+This application fetches blood sugar data from a Heroku server and displays it using Chart.js. The data can be viewed in 4 Hour, 8 Hour, and 12 Hour segments by selecting each corresponding button.\
+Data is read in 5-minute increments. The time the data was read is displayed on the Y-axis. The blood sugar value (BG Value) is on the X-axis.\
+When hovering over the datapoints, the full date, time, and BG value is displayed on hover.\
+The datapoint changes color based on pre-set BG values.\
+*Blue datapoints are within range.\
+*Orange datapoints are above range.\
+*Pink datapoints are below range.
 
 Future Development:
 Add a date-picker to compare blood sugar data between days.
