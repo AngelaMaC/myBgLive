@@ -22,7 +22,9 @@ function refreshData(count) {
         })
 
         // Activate loading screen fade animation after data renders chart
-        document.querySelector('.loader').className += ' hidden' // CSS: class '.loader .hidden'
+        setTimeout(() => {
+            document.querySelector('.loader').className += ' hidden' // CSS: class '.loader .hidden'
+        }, 2000)
 
         // Change color of datapoint to indicate BG range
         const bkgcolor = [];
