@@ -24,7 +24,7 @@ function refreshData(count) {
         // Activate loading screen fade animation after data renders chart
         setTimeout(() => {
             document.querySelector('.loader').className += ' hidden' // CSS: class '.loader .hidden'
-        }, 2000)
+        }, 1000)
 
         // Change color of datapoint to indicate BG range
         const bkgcolor = [];
@@ -103,6 +103,7 @@ function refreshData(count) {
                 // removes colored box next to BG Data title, adds bold to dataset text
                 plugins: {
                     legend: {
+                        onClick: null, //disables click on BG Data title that removed data. Re-enable if adding more than one dataset
                         labels: {
                             boxWidth: 0,
                             font: {
