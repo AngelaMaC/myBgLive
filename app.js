@@ -1,5 +1,7 @@
 let count
+var interval = setInterval(refreshData, 50000)
 refreshData()
+setInterval(interval, 50000)
 
 function refreshData(count) {
     // Get BG data    
@@ -151,12 +153,28 @@ twelve.addEventListener('click', changeView)
 
 function changeView(e) {
     if (e.target.matches('#four')) {
+        console.log(interval)
+        stopInterval()
         refreshData(49)
+        console.log('stopped')
+        interval = setInterval(refreshData, 50000, 49)
+        setInterval(interval)
     }
     if (this.matches('#eight')) {
+        stopInterval()
         refreshData(97)
+        interval = setInterval(refreshData, 50000, 97)
+        setInterval(interval)
     }
     if (e.target.matches('#twelve')) {
+        stopInterval()
         refreshData(145)
+        interval = setInterval(refreshData, 50000, 145)
+        setInterval(interval)
     }
+}
+
+function stopInterval() {
+    clearInterval(interval)
+    interval = null
 }
